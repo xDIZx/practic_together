@@ -12,7 +12,6 @@ typedef struct {
 } Shipment;
 
 // функція для введення даних про посилку
-// функція для введення даних про посилку
 void input_shipment(Shipment *shipment) {
     printf("Enter shipment number: ");
     scanf("%d", &shipment->shipment_number);
