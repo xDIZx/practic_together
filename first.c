@@ -1,4 +1,3 @@
-Демид Ратушний, [20.07.2023 13:40]
 #include <stdio.h>
 #include <string.h>
 
@@ -105,7 +104,6 @@ int main() {
         int choice;
         scanf("%d", &choice);
 
-Демид Ратушний, [20.07.2023 13:40]
 switch (choice) {
             case 1:
                 if (num_shipments < MAX_SHIPMENTS) {
