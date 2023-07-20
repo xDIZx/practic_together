@@ -88,6 +88,15 @@ void remove_shipment(Shipment shipments[], int num_shipments, int index) {
     }
 }
 
+int is_shipment_number_duplicate(Shipment shipments[], int num_shipments, int shipment_number) {
+    for (int i = 0; i < num_shipments; i++) {
+        if (shipments[i].shipment_number == shipment_number) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main() {
     Shipment shipments[MAX_SHIPMENTS];
     int num_shipments = load_shipments_from_file(shipments);
@@ -104,15 +113,22 @@ int main() {
         int choice;
         scanf("%d", &choice);
 
-switch (choice) {
+        switch (choice) {
             case 1:
                 if (num_shipments < MAX_SHIPMENTS) {
-                    input_shipment(&shipments[num_shipments]);
-                    num_shipments++;
-                    printf("Shipment added successfully.\n");
-                    save_shipments_to_file(shipments, num_shipments);
+                    Shipment new_shipment;
+                    input_shipment(&new_shipment);
+
+                    if (is_shipment_number_duplicate(shipments, num_shipments, new_shipment.shipment_number)) {
+                        printf("A shipment with the same shipment number already exists. Please enter a different shipment number.\n");
+                    } else {
+                        shipments[num_shipments] = new_shipment;
+                        num_shipments++;
+                        printf("Shipment added successfully.\n");
+                        save_shipments_to_file(shipments, num_shipments);
+                    }
                 } else {
-                    printf("Cannot add more shipments, maximum number of shipments reached.\n");
+                    printf("Cannot add more shipments, the maximum number of shipments has been reached.\n");
                 }
                 break;
             case 2:
